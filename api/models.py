@@ -54,9 +54,10 @@ BANKS = (
 class Company(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS, default="Access Bank")
-    name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=20)
-    account_number = models.CharField(max_length=255)
+    name = models.CharField(max_length=255,blank=True)
+    company_whatsapp_phone = models.CharField(max_length=15, default="",blank=True)
+    phone = models.CharField(max_length=20,blank=True)
+    account_number = models.CharField(max_length=255,blank=True)
     created_month = models.CharField(max_length=10, blank=True, default="")
     created_year = models.CharField(max_length=10, blank=True, default="")
     date_created = models.DateTimeField(auto_now_add=True)
@@ -79,8 +80,8 @@ class AddCompanyAmountReceived(models.Model):
     company = models.ForeignKey(Company,on_delete=models.CASCADE)
     amount_received = models.DecimalField(max_digits=19, decimal_places=2, blank=True)
     receipt = models.ImageField(upload_to="receipts", default="receipt.png")
-    unique_identifier = models.CharField(max_length=255)
-    account_number = models.CharField(max_length=255, unique=True)
+    unique_identifier = models.CharField(max_length=255,blank=True)
+    account_number = models.CharField(max_length=255,blank=True)
     received_month = models.CharField(max_length=10, blank=True, default="")
     received_year = models.CharField(max_length=10, blank=True, default="")
     date_received = models.DateTimeField(auto_now_add=True)
@@ -114,10 +115,11 @@ class AddCompanyAmountReceived(models.Model):
 
 class AddCompanyAmountPayment(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
+    company_amount = models.ForeignKey(AddCompanyAmountReceived,on_delete=models.CASCADE,related_name='company_amount',default=1)
     company = models.ForeignKey(Company,on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=19, decimal_places=2, blank=True)
     screenshot = models.ImageField(upload_to="screenshots", default="screenshot.png")
-    unique_identifier = models.CharField(max_length=255)
+    unique_identifier = models.CharField(max_length=255,blank=True)
     payment_month = models.CharField(max_length=10, blank=True, default="")
     payment_year = models.CharField(max_length=10, blank=True, default="")
     date_paid = models.DateTimeField(auto_now_add=True)
@@ -133,34 +135,39 @@ class AddCompanyAmountPayment(models.Model):
         de_date = my_date.date()
         self.payment_month = de_date.month
         self.payment_year = de_date.year
-        self.unique_identifier = self.company.unique_identifier
+        self.unique_identifier = self.company_amount.unique_identifier
         super().save(*args, **kwargs)
 
         img = Image.open(self.screenshot.path)
-
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.screenshot.path)
 
     def get_screenshot_pic(self):
-        if self.receipt:
+        if self.screenshot:
             return "https://agencybankingnetwork.com" + self.screenshot.url
         return ''
 
     def get_company_amount_received(self):
-        return self.company.amount_received
+        return self.company_amount.amount_received
 
     def get_amount_received_receipt(self):
-        if self.company.receipt:
-            return "https://agencybankingnetwork.com" + self.company.receipt.url
+        if self.company_amount.receipt:
+            return "https://agencybankingnetwork.com" + self.company_amount.receipt.url
         return ''
 
     def get_amount_received_date(self):
-        return self.company.date_received
+        return self.company_amount.date_received
 
     def get_company_name(self):
         return self.company.name
 
     def get_account_number(self):
         return self.company.account_number
+
+    def get_company_phone(self):
+        return self.company.phone
+
+    def get_company_whatsapp_phone(self):
+        return self.company.company_whatsapp_phone

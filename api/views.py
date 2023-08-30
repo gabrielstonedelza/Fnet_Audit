@@ -9,6 +9,7 @@ from rest_framework import filters
 from users.models import User
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
+from django.conf import settings
 import csv
 from datetime import datetime
 
@@ -128,7 +129,16 @@ def search_my_company_amount_received_by_date(request, d_month,d_year):
 def add_new_company_payment(request):
     serializer = AddCompanyAmountPaymentSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(agent=request.user)
+        payment = serializer.save(agent=request.user)
+        # Send an email with the payment details and screenshot
+        subject = 'Payment Details'
+        message = f"Payment of ${payment.amount} has been received from {payment.agent.username}."
+        from_email = settings.EMAIL_HOST_USER
+        to_email = ["gabrielstonedelza@gmail.com",]  # Assuming user provides email in the request
+
+        email = EmailMessage(subject, message, from_email, to_email)
+        email.attach_file(payment.screenshot.path)
+        email.send()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
