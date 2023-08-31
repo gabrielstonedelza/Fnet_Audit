@@ -105,7 +105,8 @@ ENV/
 *.sqlite3
 
 media/profile_pics
-media/mobile_money_users
+media/screenshots
+media/receipts
 *.pyc
 *.db
 *.pid
