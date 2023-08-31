@@ -172,3 +172,6 @@ class AddCompanyAmountPayment(models.Model):
 
     def get_company_whatsapp_phone(self):
         return self.company.company_whatsapp_phone
+
+    def get_company_email(self):
+        return self.company.email
