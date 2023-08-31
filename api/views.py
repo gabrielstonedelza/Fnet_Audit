@@ -241,6 +241,14 @@ def search_agents_company_amount_received_by_date(request, username,d_month,d_ye
     serializer = AddCompanyAmountPaymentSerializer(company, many=True)
     return Response(serializer.data)
 
+# get company by name
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def get_company_by_name(request, name):
+    company = Company.objects.filter(name=name)
+    serializer = CompanySerializer(company, many=True)
+    return Response(serializer.data)
+
 # @api_view(['GET'])
 # @permission_classes([permissions.AllowAny])
 # def export_momo_cash_in_transactions_csv(request, username, d_month,d_year,owner_email):
