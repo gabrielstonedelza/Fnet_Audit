@@ -67,10 +67,20 @@ class SearchCompany(generics.ListAPIView):
 # add company amount received
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
-def add_new_company_amount_received(request):
+def add_new_company_amount_received(request,com_email,user_email):
     serializer = AddCompanyAmountReceivedSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(agent=request.user)
+        amount_received = serializer.save(agent=request.user)
+        # Send an email with the amount_received details and screenshot
+        subject = 'Amount Details'
+        message = f"An amount of ${amount_received.amount_received} has been received from {amount_received.agent.username}."
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [com_email,user_email]  # Assuming user provides email in the request
+
+        email = EmailMessage(subject, message, from_email, to_email)
+        email.attach_file(amount_received.receipt.path)
+        for i in to_email:
+            email.send()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -126,7 +136,7 @@ def search_my_company_amount_received_by_date(request, d_month,d_year):
 
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
-def add_new_company_payment(request):
+def add_new_company_payment(request,com_email,user_email):
     serializer = AddCompanyAmountPaymentSerializer(data=request.data)
     if serializer.is_valid():
         payment = serializer.save(agent=request.user)
@@ -134,11 +144,12 @@ def add_new_company_payment(request):
         subject = 'Payment Details'
         message = f"Payment of ${payment.amount} has been received from {payment.agent.username}."
         from_email = settings.EMAIL_HOST_USER
-        to_email = ["gabrielstonedelza@gmail.com",]  # Assuming user provides email in the request
+        to_email = [com_email,user_email]  # Assuming user provides email in the request
 
         email = EmailMessage(subject, message, from_email, to_email)
         email.attach_file(payment.screenshot.path)
-        email.send()
+        for i in to_email:
+            email.send()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

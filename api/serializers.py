@@ -4,7 +4,7 @@ from .models import Company, AddCompanyAmountReceived, AddCompanyAmountPayment
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ['id','agent','bank','name','phone','account_number','date_created','get_agent_username','created_month','created_year','company_whatsapp_phone']
+        fields = ['id','agent','bank','name','phone','account_number','date_created','get_agent_username','created_month','created_year','company_whatsapp_phone','email']
         read_only_fields = ['agent']
 
 class AddCompanyAmountReceivedSerializer(serializers.ModelSerializer):
