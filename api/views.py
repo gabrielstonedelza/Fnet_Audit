@@ -67,7 +67,7 @@ class SearchCompany(generics.ListAPIView):
 # add company amount received
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
-def add_new_company_amount_received(request,com_email,user_email):
+def add_new_company_amount_received(request,com_email):
     serializer = AddCompanyAmountReceivedSerializer(data=request.data)
     if serializer.is_valid():
         amount_received = serializer.save(agent=request.user)
@@ -75,7 +75,7 @@ def add_new_company_amount_received(request,com_email,user_email):
         subject = 'Amount Details'
         message = f"An amount of ${amount_received.amount_received} has been received from {amount_received.agent.username}."
         from_email = settings.EMAIL_HOST_USER
-        to_email = [com_email,user_email]  # Assuming user provides email in the request
+        to_email = [com_email,"fnetbankghana@gmail.com"]  # Assuming user provides email in the request
 
         email = EmailMessage(subject, message, from_email, to_email)
         email.attach_file(amount_received.receipt.path)
@@ -136,7 +136,7 @@ def search_my_company_amount_received_by_date(request, d_month,d_year):
 
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
-def add_new_company_payment(request,com_email,user_email):
+def add_new_company_payment(request,com_email):
     serializer = AddCompanyAmountPaymentSerializer(data=request.data)
     if serializer.is_valid():
         payment = serializer.save(agent=request.user)
@@ -144,7 +144,7 @@ def add_new_company_payment(request,com_email,user_email):
         subject = 'Payment Details'
         message = f"Payment of ${payment.amount} has been received from {payment.agent.username}."
         from_email = settings.EMAIL_HOST_USER
-        to_email = [com_email,user_email]  # Assuming user provides email in the request
+        to_email = [com_email,"fnetbankghana@gmail.com"]  # Assuming user provides email in the request
 
         email = EmailMessage(subject, message, from_email, to_email)
         email.attach_file(payment.screenshot.path)

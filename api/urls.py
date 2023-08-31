@@ -11,7 +11,7 @@ urlpatterns = [
     path("search_companies/", views.SearchCompany.as_view()),
 
 #     amount received
-    path("add_new_company_amount_received/<str:com_email>/<str:user_email>/", views.add_new_company_amount_received),
+    path("add_new_company_amount_received/<str:com_email>/", views.add_new_company_amount_received),
     path("update_company_amount_received/<int:pk>/", views.update_company_amount_received),
     path("delete_company_amount_received/<int:pk>/", views.delete_company_amount_received),
     path("get_my_companies_amount_received/", views.get_my_companies_amount_received),
@@ -20,7 +20,7 @@ urlpatterns = [
     path("search_my_company_amount_received_by_date/<str:d_month>/<str:d_year>/", views.search_my_company_amount_received_by_date),
 
 #     payments
-    path("add_new_company_payment/<str:com_email>/<str:user_email>/", views.add_new_company_payment),
+    path("add_new_company_payment/<str:com_email>/", views.add_new_company_payment),
     path("update_company_payment/<int:pk>/", views.update_company_payment),
     path("delete_company_payment/<int:pk>/", views.delete_company_payment),
     path("get_my_companies_payments/", views.get_my_companies_payments),
