@@ -79,8 +79,7 @@ def add_new_company_amount_received(request,com_email):
 
         email = EmailMessage(subject, message, from_email, to_email)
         email.attach_file(amount_received.receipt.path)
-        for i in to_email:
-            email.send()
+        email.send()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -148,8 +147,8 @@ def add_new_company_payment(request,com_email):
 
         email = EmailMessage(subject, message, from_email, to_email)
         email.attach_file(payment.screenshot.path)
-        for i in to_email:
-            email.send()
+        email.send()
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
