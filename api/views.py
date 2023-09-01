@@ -248,6 +248,13 @@ def get_company_by_name(request, name):
     serializer = CompanySerializer(company, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def get_company_payment_by_name(request, company_amount):
+    company = AddCompanyAmountPayment.objects.filter(company_amount=company_amount)
+    serializer = AddCompanyAmountPaymentSerializer(company, many=False)
+    return Response(serializer.data)
+
 # @api_view(['GET'])
 # @permission_classes([permissions.AllowAny])
 # def export_momo_cash_in_transactions_csv(request, username, d_month,d_year,owner_email):
