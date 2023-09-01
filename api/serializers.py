@@ -10,7 +10,7 @@ class CompanySerializer(serializers.ModelSerializer):
 class AddCompanyAmountReceivedSerializer(serializers.ModelSerializer):
     class Meta:
         model = AddCompanyAmountReceived
-        fields = ['id','agent','company','amount_received','receipt','unique_identifier','date_received','get_agent_username','get_receipt_pic','account_number','received_month','received_year']
+        fields = ['id','agent','company','amount_received','receipt','unique_identifier','date_received','get_agent_username','get_receipt_pic','account_number','received_month','received_year','get_company_name']
         read_only_fields = ['agent']
 
 class AddCompanyAmountPaymentSerializer(serializers.ModelSerializer):

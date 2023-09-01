@@ -93,6 +93,9 @@ class AddCompanyAmountReceived(models.Model):
     def get_agent_username(self):
         return self.agent.username
 
+    def get_company_name(self):
+        return self.company.name
+
     def save(self, *args, **kwargs):
         my_date = datetime.today()
         de_date = my_date.date()
