@@ -252,7 +252,7 @@ def get_company_by_name(request, name):
 @permission_classes([permissions.AllowAny])
 def get_company_by_id(request, id):
     company = get_object_or_404(AddCompanyAmountReceived,id=id)
-    serializer = AddCompanyAmountPaymentSerializer(company, many=False)
+    serializer = AddCompanyAmountReceivedSerializer(company, many=False)
     return Response(serializer.data)
 
 # @api_view(['GET'])
