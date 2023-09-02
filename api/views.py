@@ -250,8 +250,8 @@ def get_company_by_name(request, name):
 
 @api_view(['GET'])
 @permission_classes([permissions.AllowAny])
-def get_company_by_id(request, pk):
-    company = AddCompanyAmountReceived.objects.get(pk=pk)
+def get_company_by_id(request, id):
+    company = get_object_or_404(AddCompanyAmountReceived,id=id)
     serializer = AddCompanyAmountPaymentSerializer(company, many=False)
     return Response(serializer.data)
 
