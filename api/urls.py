@@ -36,6 +36,6 @@ urlpatterns = [
     path("get_agents_companies_amount_received/", views.get_agents_companies_amount_received),
     path("get_agents_companies_payments/", views.get_agents_companies_payments),
     path("search_agents_company_payment_by_date/", views.search_agents_company_payment_by_date),
-    path("search_agents_company_amount_received_by_date/", views.search_agents_company_amount_received_by_date),
+    # path("search_agents_company_amount_received_by_date/", views.search_agents_company_amount_received_by_date),
 
 ]
