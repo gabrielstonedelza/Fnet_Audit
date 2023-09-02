@@ -96,6 +96,9 @@ class AddCompanyAmountReceived(models.Model):
     def get_company_name(self):
         return self.company.name
 
+    def get_company_email(self):
+        return self.company.email
+
     def save(self, *args, **kwargs):
         my_date = datetime.today()
         de_date = my_date.date()
