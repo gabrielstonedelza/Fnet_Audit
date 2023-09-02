@@ -119,7 +119,7 @@ class AddCompanyAmountReceived(models.Model):
 
 class AddCompanyAmountPayment(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
-    company_amount = models.ForeignKey(AddCompanyAmountReceived,on_delete=models.CASCADE,related_name='company_amount',default=1)
+    company_amount = models.ForeignKey(AddCompanyAmountReceived,on_delete=models.CASCADE,related_name='company_amount')
     company = models.ForeignKey(Company,on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=19, decimal_places=2, blank=True)
     screenshot = models.ImageField(upload_to="screenshots", default="screenshot.png")

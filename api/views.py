@@ -237,7 +237,7 @@ def search_agents_company_payment_by_date(request, username,d_month,d_year):
 def search_agents_company_amount_received_by_date(request, username,d_month,d_year):
     user = get_object_or_404(User, username=username)
     company = AddCompanyAmountReceived.objects.filter(agent=user).filter(received_month=d_month).filter(received_year=d_year).order_by("-date_received")
-    serializer = AddCompanyAmountPaymentSerializer(company, many=True)
+    serializer = AddCompanyAmountReceivedSerializer(company, many=True)
     return Response(serializer.data)
 
 # get company by name
@@ -250,8 +250,8 @@ def get_company_by_name(request, name):
 
 @api_view(['GET'])
 @permission_classes([permissions.AllowAny])
-def get_company_payment_by_name(request, company_amount):
-    company = AddCompanyAmountPayment.objects.filter(company_amount=company_amount)
+def get_company_by_id(request, pk):
+    company = AddCompanyAmountReceived.objects.filter(pk=pk)
     serializer = AddCompanyAmountPaymentSerializer(company, many=False)
     return Response(serializer.data)
 
