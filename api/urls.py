@@ -26,7 +26,7 @@ urlpatterns = [
     path("get_my_companies_payments/", views.get_my_companies_payments),
     path("get_all_companies_payments/", views.get_all_companies_payments),
     path("search_companies_payments/", views.SearchCompanyPayments.as_view()),
-    path("search_my_company_payment_by_date/<str:d_month>/<str:d_year>/", views.search_my_company_amount_received_by_date),
+    path("search_agents_company_payments_by_date/<str:d_month>/<str:d_year>/", views.search_agents_company_payments_by_date),
     path("get_company_by_name/<str:name>/",views.get_company_by_name),
     path("get_company_by_id/<int:id>/",views.get_company_by_id),
 
