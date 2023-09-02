@@ -10,11 +10,11 @@ class CompanySerializer(serializers.ModelSerializer):
 class AddCompanyAmountReceivedSerializer(serializers.ModelSerializer):
     class Meta:
         model = AddCompanyAmountReceived
-        fields = ['id','agent','company','amount_received','receipt','unique_identifier','date_received','get_agent_username','get_receipt_pic','account_number','received_month','received_year','get_company_name','get_company_email']
+        fields = ['id','agent','company','amount_received','receipt','unique_identifier','date_received','get_agent_username','get_receipt_pic','account_number','received_month','received_year','get_company_name','get_company_email','transaction_id']
         read_only_fields = ['agent']
 
 class AddCompanyAmountPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = AddCompanyAmountPayment
-        fields = ['id','agent','company','amount','screenshot','unique_identifier','date_paid','get_agent_username','get_screenshot_pic','get_company_amount_received','get_amount_received_receipt','get_amount_received_date','get_company_name','get_account_number','payment_month','payment_year','get_company_phone','get_company_whatsapp_phone','company_amount']
+        fields = ['id','agent','company','amount','screenshot','unique_identifier','date_paid','get_agent_username','get_screenshot_pic','get_company_amount_received','get_amount_received_receipt','get_amount_received_date','get_company_name','get_account_number','payment_month','payment_year','get_company_phone','get_company_whatsapp_phone','company_amount','transaction_id']
         read_only_fields = ['agent']

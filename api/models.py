@@ -85,6 +85,7 @@ class AddCompanyAmountReceived(models.Model):
     account_number = models.CharField(max_length=255,blank=True)
     received_month = models.CharField(max_length=10, blank=True, default="")
     received_year = models.CharField(max_length=10, blank=True, default="")
+    transaction_id = models.CharField(max_length=255,default="")
     date_received = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -129,6 +130,7 @@ class AddCompanyAmountPayment(models.Model):
     unique_identifier = models.CharField(max_length=255,blank=True)
     payment_month = models.CharField(max_length=10, blank=True, default="")
     payment_year = models.CharField(max_length=10, blank=True, default="")
+    transaction_id = models.CharField(max_length=255, default="")
     date_paid = models.DateTimeField(auto_now_add=True)
 
     def get_agent_username(self):
@@ -181,3 +183,6 @@ class AddCompanyAmountPayment(models.Model):
 
     def get_company_email(self):
         return self.company.email
+
+    def get_transaction_id(self):
+        return self.company_amount.transaction_id
