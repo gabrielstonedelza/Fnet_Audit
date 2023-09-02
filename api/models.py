@@ -122,7 +122,7 @@ class AddCompanyAmountReceived(models.Model):
 
 class AddCompanyAmountPayment(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
-    company_amount_received = models.DecimalField(max_digits=19, decimal_places=2, blank=True,default=0.0)
+    company_amount = models.ForeignKey(AddCompanyAmountReceived, on_delete=models.CASCADE,related_name='company_amount')
     company = models.ForeignKey(Company,on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=19, decimal_places=2, blank=True)
     screenshot = models.ImageField(upload_to="screenshots", default="screenshot.png")
@@ -142,7 +142,7 @@ class AddCompanyAmountPayment(models.Model):
         de_date = my_date.date()
         self.payment_month = de_date.month
         self.payment_year = de_date.year
-        self.unique_identifier = self.company_amount_received.unique_identifier
+        self.unique_identifier = self.company_amount.unique_identifier
         super().save(*args, **kwargs)
 
         img = Image.open(self.screenshot.path)
@@ -157,15 +157,15 @@ class AddCompanyAmountPayment(models.Model):
         return ''
 
     def get_company_amount_received(self):
-        return self.company_amount_received.amount_received
+        return self.company_amount.amount_received
 
     def get_amount_received_receipt(self):
-        if self.company_amount_received.receipt:
-            return "https://agencybankingnetwork.com" + self.company_amount_received.receipt.url
+        if self.company_amount.receipt:
+            return "https://agencybankingnetwork.com" + self.company_amount.receipt.url
         return ''
 
     def get_amount_received_date(self):
-        return self.company_amount_received.date_received
+        return self.company_amount.date_received
 
     def get_company_name(self):
         return self.company.name
