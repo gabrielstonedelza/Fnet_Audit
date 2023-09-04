@@ -54,7 +54,7 @@ BANKS = (
 
 AMOUNT_RECEIVED_PAID_STATUS = (
     ("Pending","Pending"),
-    ("paid","paid"),
+    ("Paid","Paid"),
 )
 class Company(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
