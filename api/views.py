@@ -105,8 +105,15 @@ def delete_company_amount_received(request, pk):
 
 @api_view(['GET'])
 @permission_classes([permissions.AllowAny])
-def get_my_companies_amount_received(request):
-    companies = AddCompanyAmountReceived.objects.filter(agent=request.user).order_by('-date_received')
+def get_my_companies_amount_received_not_paid(request):
+    companies = AddCompanyAmountReceived.objects.filter(agent=request.user).filter(amount_received_paid="Pending").order_by('-date_received')
+    serializer = AddCompanyAmountReceivedSerializer(companies, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def get_my_companies_amount_received_paid(request):
+    companies = AddCompanyAmountReceived.objects.filter(agent=request.user).filter(amount_received_paid="Paid").order_by('-date_received')
     serializer = AddCompanyAmountReceivedSerializer(companies, many=True)
     return Response(serializer.data)
 

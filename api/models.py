@@ -51,6 +51,11 @@ BANKS = (
     ("AirtelTigo", "AirtelTigo"),
     ("Vodafone", "Vodafone"),
 )
+
+AMOUNT_RECEIVED_PAID_STATUS = (
+    ("Pending","Pending"),
+    ("paid","paid"),
+)
 class Company(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS, default="Access Bank")
@@ -83,6 +88,7 @@ class AddCompanyAmountReceived(models.Model):
     receipt = models.ImageField(upload_to="receipts", default="receipt.png")
     unique_identifier = models.CharField(max_length=255,blank=True)
     account_number = models.CharField(max_length=255,blank=True)
+    amount_received_paid = models.CharField(max_length=30, choices=AMOUNT_RECEIVED_PAID_STATUS, default="Pending")
     received_month = models.CharField(max_length=10, blank=True, default="")
     received_year = models.CharField(max_length=10, blank=True, default="")
     transaction_id = models.CharField(max_length=255,default="")
