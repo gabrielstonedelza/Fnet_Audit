@@ -85,13 +85,13 @@ class AddCompanyAmountReceived(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     company = models.ForeignKey(Company,on_delete=models.CASCADE)
     amount_received = models.DecimalField(max_digits=19, decimal_places=2, blank=True)
-    receipt = models.ImageField(upload_to="receipts", default="receipt.png")
+    receipt = models.ImageField(upload_to="receipts", default="receipt.png",blank=True)
     unique_identifier = models.CharField(max_length=255,blank=True)
     account_number = models.CharField(max_length=255,blank=True)
     amount_received_paid = models.CharField(max_length=30, choices=AMOUNT_RECEIVED_PAID_STATUS, default="Pending")
     received_month = models.CharField(max_length=10, blank=True, default="")
     received_year = models.CharField(max_length=10, blank=True, default="")
-    transaction_id = models.CharField(max_length=255,default="")
+    transaction_id = models.CharField(max_length=255,default="",blank=True)
     date_received = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
