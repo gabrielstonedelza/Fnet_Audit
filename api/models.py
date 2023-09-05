@@ -222,3 +222,37 @@ class AddCompanyAmountPayment(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.screenshot.path)
+
+    def get_screenshot_pic(self):
+        if self.screenshot:
+            return "https://agencybankingnetwork.com" + self.screenshot.url
+        return ''
+
+    def get_company_amount_received(self):
+        return self.company_amount.amount_received
+
+    def get_amount_received_receipt(self):
+        if self.company_amount.receipt:
+            return "https://agencybankingnetwork.com" + self.company_amount.receipt.url
+        return ''
+
+    def get_amount_received_date(self):
+        return self.company_amount.date_received
+
+    def get_company_name(self):
+        return self.company.name
+
+    def get_account_number(self):
+        return self.company.account_number
+
+    def get_company_phone(self):
+        return self.company.phone
+
+    def get_company_whatsapp_phone(self):
+        return self.company.company_whatsapp_phone
+
+    def get_company_email(self):
+        return self.company.email
+
+    def get_transaction_id(self):
+        return self.company_amount.transaction_id

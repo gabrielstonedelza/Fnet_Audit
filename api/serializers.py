@@ -88,6 +88,5 @@ class AddCompanyAmountPaymentSerializer(serializers.ModelSerializer):
                   'transaction_id18',
                   'transaction_id19',
                   'transaction_id20',
-
                   ]
         read_only_fields = ['agent']
