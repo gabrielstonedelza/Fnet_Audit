@@ -228,6 +228,106 @@ class AddCompanyAmountPayment(models.Model):
             return "https://agencybankingnetwork.com" + self.screenshot.url
         return ''
 
+    def get_screenshot_pic1(self):
+        if self.screenshot1:
+            return "https://agencybankingnetwork.com" + self.screenshot1.url
+        return ''
+
+    def get_screenshot_pic2(self):
+        if self.screenshot2:
+            return "https://agencybankingnetwork.com" + self.screenshot2.url
+        return ''
+
+    def get_screenshot_pic3(self):
+        if self.screenshot3:
+            return "https://agencybankingnetwork.com" + self.screenshot3.url
+        return ''
+
+    def get_screenshot_pic4(self):
+        if self.screenshot4:
+            return "https://agencybankingnetwork.com" + self.screenshot4.url
+        return ''
+
+    def get_screenshot_pic5(self):
+        if self.screenshot5:
+            return "https://agencybankingnetwork.com" + self.screenshot5.url
+        return ''
+
+    def get_screenshot_pic6(self):
+        if self.screenshot6:
+            return "https://agencybankingnetwork.com" + self.screenshot6.url
+        return ''
+
+    def get_screenshot_pic7(self):
+        if self.screenshot7:
+            return "https://agencybankingnetwork.com" + self.screenshot7.url
+        return ''
+
+    def get_screenshot_pic8(self):
+        if self.screenshot8:
+            return "https://agencybankingnetwork.com" + self.screenshot8.url
+        return ''
+
+    def get_screenshot_pic9(self):
+        if self.screenshot9:
+            return "https://agencybankingnetwork.com" + self.screenshot9.url
+        return ''
+
+    def get_screenshot_pic10(self):
+        if self.screenshot10:
+            return "https://agencybankingnetwork.com" + self.screenshot10.url
+        return ''
+
+    def get_screenshot_pic11(self):
+        if self.screenshot11:
+            return "https://agencybankingnetwork.com" + self.screenshot11.url
+        return ''
+
+    def get_screenshot_pic12(self):
+        if self.screenshot12:
+            return "https://agencybankingnetwork.com" + self.screenshot12.url
+        return ''
+
+    def get_screenshot_pic13(self):
+        if self.screenshot13:
+            return "https://agencybankingnetwork.com" + self.screenshot13.url
+        return ''
+
+    def get_screenshot_pic14(self):
+        if self.screenshot14:
+            return "https://agencybankingnetwork.com" + self.screenshot14.url
+        return ''
+
+    def get_screenshot_pic15(self):
+        if self.screenshot15:
+            return "https://agencybankingnetwork.com" + self.screenshot15.url
+        return ''
+
+    def get_screenshot_pic16(self):
+        if self.screenshot16:
+            return "https://agencybankingnetwork.com" + self.screenshot16.url
+        return ''
+
+    def get_screenshot_pic17(self):
+        if self.screenshot17:
+            return "https://agencybankingnetwork.com" + self.screenshot17.url
+        return ''
+
+    def get_screenshot_pic18(self):
+        if self.screenshot18:
+            return "https://agencybankingnetwork.com" + self.screenshot18.url
+        return ''
+
+    def get_screenshot_pic19(self):
+        if self.screenshot19:
+            return "https://agencybankingnetwork.com" + self.screenshot19.url
+        return ''
+
+    def get_screenshot_pic20(self):
+        if self.screenshot20:
+            return "https://agencybankingnetwork.com" + self.screenshot20.url
+        return ''
+
     def get_company_amount_received(self):
         return self.company_amount.amount_received
 
