@@ -1,10 +1,11 @@
-from rest_framework import viewsets, permissions, generics, status
+from django.shortcuts import render
+from rest_framework import filters
+from rest_framework import permissions, generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from .serializers import ProfileSerializer, UsersSerializer
-from .models import Profile, User
-from django.shortcuts import render, get_object_or_404
 
+from .models import Profile, User
+from .serializers import ProfileSerializer, UsersSerializer
 
 
 @api_view(['GET'])
@@ -30,4 +31,12 @@ def update_profile(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class GetAllAgents(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UsersSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username']
 
+    def get_queryset(self):
+        agent = self.request.user
+        return User.objects.exclude(id=agent.id).order_by('-date_joined')

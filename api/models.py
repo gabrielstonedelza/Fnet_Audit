@@ -96,6 +96,8 @@ class AddCompanyAmountReceived(models.Model):
     received_year = models.CharField(max_length=10, blank=True, default="")
     transaction_id = models.CharField(max_length=255, default="", blank=True)
     total = models.DecimalField(decimal_places=2, max_digits=19, default=0.0)
+    teller_name = models.CharField(max_length=100, default="", blank=True)
+    teller_phone = models.CharField(max_length=100, default="", blank=True)
     d_200 = models.IntegerField(default=0, blank=True)
     d_100 = models.IntegerField(default=0, blank=True)
     d_50 = models.IntegerField(default=0, blank=True)
