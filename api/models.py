@@ -140,6 +140,7 @@ class AddCompanyAmountReceived(models.Model):
             twenty_cedis_values) + Decimal(ten_cedis_values) + Decimal(five_cedis_values) + Decimal(
             two_cedis_values) + Decimal(one_cedi_values)
         self.total = Decimal(amount_total)
+        super().save(*args, **kwargs)
 
         img = Image.open(self.receipt.path)
 
@@ -147,8 +148,6 @@ class AddCompanyAmountReceived(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.receipt.path)
-
-        super().save(*args, **kwargs)
 
     def get_receipt_pic(self):
         if self.receipt:
