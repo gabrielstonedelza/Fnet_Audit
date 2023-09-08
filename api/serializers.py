@@ -16,7 +16,9 @@ class AddCompanyAmountReceivedSerializer(serializers.ModelSerializer):
         model = AddCompanyAmountReceived
         fields = ['id', 'agent', 'company', 'amount_received', 'receipt', 'unique_identifier', 'date_received',
                   'get_agent_username', 'get_receipt_pic', 'account_number', 'received_month', 'received_year',
-                  'get_company_name', 'get_company_email', 'transaction_id', 'amount_received_paid']
+                  'get_company_name', 'get_company_email', 'transaction_id', 'amount_received_paid', 'd_200', 'd_100',
+                  'd_50',
+                  'd_20', 'd_10', 'd_5', 'd_2', 'd_1']
         read_only_fields = ['agent']
 
 
