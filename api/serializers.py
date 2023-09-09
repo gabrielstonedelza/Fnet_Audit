@@ -18,8 +18,7 @@ class AddCompanyAmountReceivedSerializer(serializers.ModelSerializer):
                   'get_agent_username', 'get_receipt_pic', 'account_number', 'received_month', 'received_year',
                   'get_company_name', 'get_company_email', 'transaction_id', 'amount_received_paid', 'd_200', 'd_100',
                   'd_50',
-                  'd_20', 'd_10', 'd_5', 'd_2', 'd_1', 'teller_name', 'teller_phone',
-                  'get_company_amount_received_teller_name', 'get_company_amount_received_teller_phone']
+                  'd_20', 'd_10', 'd_5', 'd_2', 'd_1', 'teller_name', 'teller_phone']
         read_only_fields = ['agent']
 
 
@@ -111,5 +110,7 @@ class AddCompanyAmountPaymentSerializer(serializers.ModelSerializer):
                   'get_screenshot_pic18',
                   'get_screenshot_pic19',
                   'get_screenshot_pic20',
+                  'get_company_amount_received_teller_name',
+                  'get_company_amount_received_teller_phone'
                   ]
         read_only_fields = ['agent']
