@@ -389,3 +389,6 @@ class AddCompanyAmountPayment(models.Model):
 
     def get_company_amount_received_teller_phone(self):
         return self.company_amount.teller_phone
+
+    def get_company_amount_received_username(self):
+        return self.company_amount.agent.username

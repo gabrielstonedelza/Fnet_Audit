@@ -29,6 +29,7 @@ class AddCompanyAmountPaymentSerializer(serializers.ModelSerializer):
                   'get_agent_username', 'get_screenshot_pic', 'get_company_amount_received',
                   'get_amount_received_receipt', 'get_amount_received_date', 'get_company_name', 'get_account_number',
                   'payment_month', 'payment_year', 'get_company_phone', 'get_company_whatsapp_phone', 'company_amount',
+                  'get_company_amount_received_username',
                   'transaction_id', 'get_transaction_id',
                   'amount1',
                   'amount2',
