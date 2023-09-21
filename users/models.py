@@ -1,17 +1,25 @@
-from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.conf import settings
 from PIL import Image
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 DeUser = settings.AUTH_USER_MODEL
 
+USER_TYPE = (
+    ("Administrator", "Administrator"),
+    ("User", "User"),
+    ("Customer", "Customer"),
+)
+
+
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
-    phone = models.CharField(max_length=15,)
+    phone = models.CharField(max_length=15, )
     company_name = models.CharField(max_length=200)
+    user_type = models.CharField(max_length=100, choices=USER_TYPE, default="User")
     full_name = models.CharField(max_length=150, default="Fnet User")
 
-    REQUIRED_FIELDS = ['email', 'phone', 'company_name', 'full_name']
+    REQUIRED_FIELDS = ['email', 'phone', 'company_name', 'full_name', 'user_type']
     USERNAME_FIELD = 'username'
 
     def get_username(self):
@@ -36,6 +44,9 @@ class Profile(models.Model):
 
     def get_username(self):
         return self.user.username
+
+    def get_usertype(self):
+        return self.user.user_type
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

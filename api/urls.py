@@ -45,4 +45,8 @@ urlpatterns = [
          views.search_agents_company_amount_received_by_date),
     # path("search_agents_company_amount_received_by_date/", views.search_agents_company_amount_received_by_date),
 
+    #     for customers
+    path("get_customer_company_details<str:company>/", views.get_customer_company_details),
+    path("get_customer_company_amounts_received<int:company>/", views.get_customer_company_amounts_received),
+
 ]

@@ -296,31 +296,20 @@ def get_company_by_id(request, id):
     serializer = AddCompanyAmountReceivedSerializer(company, many=False)
     return Response(serializer.data)
 
-# @api_view(['GET'])
-# @permission_classes([permissions.AllowAny])
-# def export_momo_cash_in_transactions_csv(request, username, d_month,d_year,owner_email):
-#     user = get_object_or_404(User, username=username)
-#     # Query data from the BankTransaction model
-#     transactions = MobileMoneyDeposit.objects.filter(agent=user).filter(deposited_month=d_month).filter(deposited_year=d_year).order_by("-date_deposited")
-#
-#     # Create a CSV file
-#     response = HttpResponse(content_type='text/csv')
-#     response['Content-Disposition'] = 'attachment; filename="transactions.csv"'
-#
-#     # Write data to the CSV file
-#     writer = csv.writer(response)
-#     writer.writerow(['Transaction ID', 'Agent', 'Customer','Amount Sent','Cash Received','Network','Type','Depositor Name','Depositor Number','Date'])  # Add your desired fields here
-#
-#     for transaction in transactions:
-#         writer.writerow([transaction.id, transaction.agent, transaction.customer, transaction.amount_sent,transaction.cash_received, transaction.network,transaction.type,transaction.depositor_name, transaction.depositor_number,transaction.d_date])  # Add your desired fields here
-#
-#     # Send the CSV file through email
-#     email = EmailMessage(
-#         'Momo Cash In Transactions CSV',
-#         'Please find attached the momo cash in transactions CSV file.',
-#         'gabrielstonedelza@gmail.com',
-#         [f'{owner_email}']
-#     )
-#     email.attach('transactions.csv', response.getvalue(), 'text/csv')
-#     email.send()
-#     return HttpResponse("Momo cash in transactions exported and sent through email.")
+
+# customer
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def get_customer_company_details(request, company):
+    company = Company.objects.filter(name=company).order_by("-date_created")
+    serializer = CompanySerializer(company, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def get_customer_company_amounts_received(request, company):
+    company_amounts_received = AddCompanyAmountReceived.objects.filter(company=company).order_by("-date_received")
+    serializer = AddCompanyAmountReceivedSerializer(company_amounts_received, many=True)
+    return Response(serializer.data)
