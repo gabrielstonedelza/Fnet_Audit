@@ -1,10 +1,10 @@
-import random
 from datetime import datetime
 from decimal import Decimal
 
 from PIL import Image
 from django.conf import settings
 from django.db import models
+import secrets
 
 User = settings.AUTH_USER_MODEL
 
@@ -125,7 +125,7 @@ class AddCompanyAmountReceived(models.Model):
         de_date = my_date.date()
         self.received_month = de_date.month
         self.received_year = de_date.year
-        self.unique_identifier = self.company.name[:5] + str(random.randint(1, 90000))
+        self.unique_identifier = self.company.name[:5] + str(secrets.SystemRandom().randint(1, 90000))
         self.account_number = self.company.account_number
 
         two_h_cedis_values = self.d_200 * 200
